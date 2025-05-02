@@ -29,20 +29,20 @@ export interface Message {
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-// export const api = axios.create({
-  
-//   baseURL: `${BACKEND_URL}`,
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// });
-
 export const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  
+  baseURL: `${BACKEND_URL}`,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// export const api = axios.create({
+//   baseURL: 'http://localhost:8000',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
 // In lib/api.ts, update the streamResponse function:
 export async function streamResponse(

@@ -59,13 +59,13 @@ Create a `.env.local` file at the project root with the following variables:
 
 ```env
 # Hedera network (testnet or mainnet)
-HEDERA_NETWORK=testnet
+NEXT_PUBLIC_HEDERA_NETWORK=testnet
 
 # Operator credentials
-OPERATOR_ID=0.0.xxxx
-OPERATOR_KEY="302e..."
-BACKEND_URL=""
-TOPIC_ID(optional)
+NEXT_PUBLIC_OPERATOR_ID=0.0.xxxx
+NEXT_PUBLIC_OPERATOR_KEY="302e..."
+NEXT_PUBLIC_BACKEND_URL=""
+NEXT_PUBLIC_TOPIC_ID(optional)=""
 
 ```
 
