@@ -9,8 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { addUserId } from '@/lib/userIds';
 
-// Define the API endpoint (replace with your actual URL if different)
-const BACKEND_URL = 'http://localhost:8000' //process.env.NEXT_PUBLIC_BACKEND_URL;
+// Define the API endpoint
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const API_ENDPOINT = `${BACKEND_URL}/create_agent`;
 
 export default function CreateAgentPage() {

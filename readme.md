@@ -1,10 +1,10 @@
-# Instagram Agent Chat (Hedera Hackathon)
+# Unthink Creator Agent Chat (Hedera Hackathon)
 
-An application built for the Hedera Hackathon, leveraging the Hedera Consensus Service (HCS) via the `hcs10-client` SDK. This project allows users to sign up as agents and provides a chat interface for real‑time messaging.
+An application built for the Hedera Hackathon, leveraging the Hedera Consensus Service (HCS) via the `hcs10-client` SDK. This project allows creators to sign up as agents and provides a chat interface for real‑time messaging.
 
 ## Table of Contents
 
-- Instagram Agent Chat (Hedera Hackathon)
+- Unthink Creator Agent Chat (Hedera Hackathon)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Tech Stack](#tech-stack)
@@ -17,7 +17,7 @@ An application built for the Hedera Hackathon, leveraging the Hedera Consensus S
 
 ## Features
 
-* **Agent Signup**: Users can sign up to become "agents" through the root (`/`) route.
+* **Agent Signup**: creators can sign up to become "agents" through the root (`/`) route.
 * **Agent Chat**: A dedicated chat window at `/chatagent/[userid]` for real‑time conversation backed by Hedera Consensus Service.
 * **HCS10 Client Integration**: Secure message publishing and subscription using Hedera’s HCS via `hcs10-client`.
 
@@ -64,7 +64,7 @@ NEXT_PUBLIC_HEDERA_NETWORK=testnet
 # Operator credentials
 NEXT_PUBLIC_OPERATOR_ID=0.0.xxxx
 NEXT_PUBLIC_OPERATOR_KEY="302e..."
-NEXT_PUBLIC_BACKEND_URL=""
+NEXT_PUBLIC_BACKEND_URL="" (URL which helps to get back the response)
 NEXT_PUBLIC_TOPIC_ID(optional)=""
 
 ```
@@ -81,13 +81,5 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Routes
 
-* **`/`** – Agent signup process. New users fill out a form to register as agents; upon submission, a `instagram userid` is passed to backend.
+* **`/`** – Agent signup process. New creators fill out a form to register as agents; upon submission, a `instagram user id` is passed to backend.
 * **`/chatagent/[userid]`** – Chat window for an agent. Real‑time messaging. Replace `[userid]` with the ID returned in mail.
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a Pull Request.
