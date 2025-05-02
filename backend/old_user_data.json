@@ -1,0 +1,286 @@
+{
+    "user_1": {
+        "name": "Sophia Miller",
+        "email": "sophia.m@example.com",
+        "purchase_history": [
+            {
+                "order_id": "ORD1001",
+                "date": "2023-01-15",
+                "items": [
+                    {"name": "Laptop Bag", "category": "Accessories", "price": 45.00, "quantity": 1},
+                    {"name": "Wireless Mouse", "category": "Electronics", "price": 25.00, "quantity": 1}
+                ],
+                "total_amount": 70.00
+            },
+            {
+                "order_id": "ORD1005",
+                "date": "2023-05-22",
+                "items": [
+                    {"name": "Office Chair", "category": "Furniture", "price": 150.00, "quantity": 1}
+
+                ],
+                "total_amount": 150.00
+            }
+        ],
+        "cart": [
+            {"name": "Ergonomic Keyboard", "category": "Electronics", "price": 75.00, "quantity": 1},
+            {"name": "Monitor Stand", "category": "Accessories", "price": 30.00, "quantity": 1}
+        ],
+        "wishlist": [
+            {"name": "Bluetooth Headphones", "category": "Electronics", "price": 120.00, "quantity": 1},
+            {"name": "Desk Lamp", "category": "Home", "price": 40.00, "quantity": 1}
+            ],
+        "preferences": {
+            "categories": ["Electronics","Accessories", "Furniture"],
+            "price_range": ["$25 - $150"],
+            "brands": ["Generic", "XYZ"]
+           },
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "zip": "12345",
+            "country": "USA"
+           },
+        "rewards_points": 450,
+        "account_creation": "2022-12-01",
+        "tracking": {
+            "has_purchased": true,
+            "total_items_purchased": 2,
+            "order_statuses": [
+                {
+                    "order_id": "ORD1001",
+                    "status": "Delivered",
+                    "delivery_date": "2023-01-20",
+                    "tracking_url": "https://example.com/track/ORD1001",
+                    "location": "New York, NY"
+                },
+                {
+                    "order_id": "ORD1005",
+                    "status": "In Transit",
+                    "expected_delivery": "2023-05-30",
+                    "tracking_url": "https://example.com/track/ORD1005",
+                    "location": "Chicago, IL"
+                }
+            ]
+        }
+    },
+    "user_2": {
+        "name": "Ethan Clark",
+        "email": "ethan.c@example.com",
+        "purchase_history": [
+            {
+                "order_id": "ORD2001",
+                "date": "2023-03-10",
+                "items": [
+                    {"name": "Running Shoes", "category": "Sports", "price": 90.00, "quantity": 1},
+                     {"name": "T-Shirt", "category": "Clothing", "price": 20.00, "quantity": 2}
+
+                ],
+                "total_amount": 130.00
+            },
+             {
+                "order_id": "ORD2003",
+                "date": "2023-04-05",
+                "items": [
+                    {"name": "Yoga Mat", "category": "Sports", "price": 30.00, "quantity": 1},
+                    {"name": "Water Bottle", "category": "Accessories", "price": 15.00, "quantity": 1}
+                ],
+                "total_amount": 45.00
+            }
+        ],
+        "cart": [
+           {"name": "Gym Bag", "category": "Sports", "price": 35.00, "quantity": 1}
+        ],
+        "wishlist": [
+            {"name": "Smart Watch", "category": "Electronics", "price": 200.00, "quantity": 1}
+
+            ],
+        "preferences": {
+             "categories": ["Sports", "Clothing","Accessories"],
+            "price_range": ["$15 - $200"],
+            "brands": ["Nike", "Adidas"]
+           },
+        "address": {
+            "street": "456 Oak Ave",
+            "city": "Springfield",
+            "zip": "67890",
+            "country": "USA"
+           },
+        "rewards_points": 230,
+        "account_creation": "2022-10-20",
+        "tracking": {
+            "has_purchased": true,
+            "total_items_purchased": 2,
+            "orders": [
+                {
+                    "order_id": "ORD2001",
+                    "status": "Delivered",
+                    "current_location": "Customer's Address",
+                    "expected_delivery_date": "2023-03-15"
+                },
+                {
+                    "order_id": "ORD2003",
+                    "status": "In Transit",
+                    "current_location": "Shipping Hub - New York",
+                    "expected_delivery_date": "2023-04-08"
+                }
+            ]
+        }
+    },
+    "user_3": {
+         "name": "Olivia Davis",
+         "email": "olivia.d@example.com",
+         "purchase_history": [
+            {
+                "order_id": "ORD3001",
+                "date": "2023-02-20",
+                "items": [
+                    {"name": "Floral Dress", "category": "Clothing", "price": 80.00, "quantity": 1},
+                    {"name": "Handbag", "category": "Accessories", "price": 60.00, "quantity": 1}
+                ],
+                "total_amount": 140.00
+            },
+            {
+                "order_id": "ORD3002",
+                "date": "2023-06-15",
+                "items": [
+                    {"name": "Summer Dress", "category": "Clothing", "price": 75.00, "quantity": 1}
+
+                ],
+                "total_amount": 75.00
+            }
+        ],
+        "cart": [
+             {"name": "Sunglasses", "category": "Accessories", "price": 50.00, "quantity": 1}
+            ],
+        "wishlist": [
+            {"name": "Heels", "category": "Clothing", "price": 100.00, "quantity": 1}
+
+            ],
+        "preferences": {
+            "categories": ["Clothing", "Accessories"],
+            "price_range": ["$50 - $150"],
+            "brands": ["Zara","H&M"]
+           },
+         "address": {
+            "street": "789 Pine Ln",
+            "city": "Hilldale",
+            "zip": "54321",
+            "country": "Canada"
+        },
+        "rewards_points": 1200,
+        "tracking": {
+            "has_purchased": true,
+            "total_items_purchased": 2,
+            "orders": [
+                {
+                    "order_id": "ORD3001",
+                    "status": "Delivered",
+                    "current_location": "Customer's Address",
+                    "expected_delivery_date": "2023-03-15"
+                },
+                {
+                    "order_id": "ORD3002",
+                    "status": "In Transit",
+                    "current_location": "Shipping Hub - New York",
+                    "expected_delivery_date": "2023-06-08"
+                }
+            ]
+        }
+     },
+     "user_4": {
+        "name": "Liam Taylor",
+        "email": "liam.t@example.com",
+        "purchase_history": [
+           {
+                "order_id": "ORD4001",
+                "date": "2023-01-25",
+                "items": [
+                    {"name": "Graphic T-Shirt", "category": "Clothing", "price": 30.00, "quantity": 2},
+                     {"name": "Jeans", "category": "Clothing", "price": 55.00, "quantity": 1}
+                ],
+                "total_amount": 115.00
+            },
+             {
+                 "order_id": "ORD4002",
+                "date": "2023-04-22",
+                "items": [
+                    {"name": "Sneakers", "category": "Clothing", "price": 70.00, "quantity": 1}
+
+                ],
+                "total_amount": 70.00
+            }
+        ],
+        "cart": [
+
+        ],
+        "wishlist": [
+             {"name": "Leather Jacket", "category": "Clothing", "price": 180.00, "quantity": 1}
+
+        ],
+         "preferences": {
+            "categories": ["Clothing"],
+            "price_range": ["$30 - $200"],
+            "brands": ["Levi's", "Gap"]
+         },
+         "address": {
+             "street": "101 River Rd",
+            "city": "Lakewood",
+             "zip": "98765",
+            "country": "USA"
+           },
+        "rewards_points": 760,
+        "account_creation": "2022-09-05",
+        "tracking": {
+            "has_purchased": true,
+            "total_items_purchased": 4
+        }
+    },
+    "user_5": {
+        "name": "Ava Garcia",
+        "email": "ava.g@example.com",
+       "purchase_history": [
+           {
+                "order_id": "ORD5001",
+                "date": "2023-01-12",
+                 "items": [
+                    {"name": "Cookware Set", "category": "Home", "price": 200.00, "quantity": 1}
+
+                 ],
+                "total_amount": 200.00
+            },
+            {
+                "order_id": "ORD5003",
+                "date": "2023-05-01",
+                "items": [
+                    {"name": "Cutting Board", "category": "Home", "price": 25.00, "quantity": 1}
+
+                ],
+                "total_amount": 25.00
+            }
+        ],
+        "cart": [
+            {"name": "Blender", "category": "Home", "price": 80.00, "quantity": 1}
+        ],
+        "wishlist": [
+             {"name": "Toaster", "category": "Home", "price": 50.00, "quantity": 1}
+            ],
+         "preferences": {
+            "categories": ["Home"],
+            "price_range": ["$25 - $200"],
+            "brands": ["KitchenAid","Cuisinart"]
+          },
+        "address": {
+            "street": "222 Hill St",
+            "city": "Brookside",
+            "zip": "12000",
+            "country": "Canada"
+        },
+        "rewards_points": 900,
+        "account_creation": "2022-11-25",
+         "tracking": {
+            "has_purchased": true,
+            "total_items_purchased": 2
+        }
+    }
+}
