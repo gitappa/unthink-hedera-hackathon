@@ -1,10 +1,10 @@
-# SSCPREP Agent Chat (Hedera Hackathon)
+# Instagram Agent Chat (Hedera Hackathon)
 
 An application built for the Hedera Hackathon, leveraging the Hedera Consensus Service (HCS) via the `hcs10-client` SDK. This project allows users to sign up as agents and provides a chat interface for real‑time messaging.
 
 ## Table of Contents
 
-- [SSCPREP Agent Chat (Hedera Hackathon)](#sscprep-agent-chat-hedera-hackathon)
+- Instagram Agent Chat (Hedera Hackathon)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Tech Stack](#tech-stack)
@@ -14,7 +14,6 @@ An application built for the Hedera Hackathon, leveraging the Hedera Consensus S
     - [Environment Variables](#environment-variables)
     - [Running the Development Server](#running-the-development-server)
   - [Routes](#routes)
-  - [Contributing](#contributing)
 
 ## Features
 
