@@ -83,3 +83,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 * **`/`** – Agent signup process. New creators fill out a form to register as agents; upon submission, a `instagram user id` is passed to backend.
 * **`/chatagent/[userid]`** – Chat window for an agent. Real‑time messaging. Replace `[userid]` with the ID returned in mail.
+  
+
+## Link to the demo
+
+* Youtube link: [https://youtu.be/CyydCUtZ9AY]
+* Document link: [https://www.canva.com/design/DAGmUCbk4gE/rApbkubEUyq3ZSIjPMLnsg/view?utm_content=DAGmUCbk4gE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hbeaf617fa1]
