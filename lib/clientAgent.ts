@@ -8,6 +8,8 @@ const FIRSTAGENT_PRIVATE_KEY = process.env.NEXT_PUBLIC_FIRSTAGENT_PRIVATE_KEY!;
 const SECONDAGENT_INBOUND_TOPIC_ID = process.env.NEXT_PUBLIC_SECONDAGENT_INBOUND_TOPIC_ID!;
 const HEDERA_NETWORK = process.env.HEDERA_NETWORK;
 
+const CONNECTION_TOPIC_ID = process.env.NEXT_PUBLIC_CONNECTION_TOPIC_ID ?? '';
+
 export interface SendAndReceiveResult {
   res: string;
   feeSent: string;   
@@ -58,8 +60,8 @@ class AgentService {
       const confirmation = await this.client.waitForConnectionConfirmation(
         SECONDAGENT_INBOUND_TOPIC_ID,
         seq,
-        15,
-        3000
+        20,
+        4000
       );
       if (!confirmation.connectionTopicId) {
         throw new Error('Connection confirmation failed');
@@ -71,12 +73,18 @@ class AgentService {
 
   public async sendAndReceive(message: string, ig_id: string, sessionId: string): Promise<SendAndReceiveResult> {
 
-    if (!this.connectionTopicId) {
-      console.log('init')
-      await this.initConnection();
+    let topic;
+    if (CONNECTION_TOPIC_ID.trim() === '0.0.6006045') {
+      console.log(`[Agent-2] Using preset connection topic ${CONNECTION_TOPIC_ID} – starting listener…`);
+      topic = '0.0.6006045'
+    } else {
+      if (!this.connectionTopicId) {
+        console.log('initialise')
+        await this.initConnection();
+      }
+      topic = this.connectionTopicId!;
     }
-    const topic = this.connectionTopicId!;
-
+  
     const payload = {
       message: message,
       ig_id: ig_id,
@@ -102,16 +110,16 @@ class AgentService {
       }
 
       if (latest && latest.data !== jsonMessage && latest.m ===`code:${randomCode}`) {
-        console.log('asdop',latest)
 
         let latestData: string;
         latestData = latest.data;
+
         // const [feeSent, feeReceived] = await Promise.all([
         //   this.submitWithFee(topic, jsonMessage),
         //   this.submitWithFee(topic, latestData),
         // ])
 
-        // dummy data
+        // dummy fee data
         const feeSent = '0.0004678'
         const feeReceived = '0.0003238'
 

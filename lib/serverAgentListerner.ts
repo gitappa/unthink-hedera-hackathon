@@ -8,15 +8,15 @@ import {
   Client,
 } from "@hashgraph/sdk";
 
-const SECONDAGENT_ACCOUNT_ID      = process.env.NEXT_PUBLIC_SECONDAGENT_ACCOUNT_ID!;
-const SECONDAGENT_PRIVATE_KEY     = process.env.NEXT_PUBLIC_SECONDAGENT_PRIVATE_KEY!;
-const SECONDAGENT_INBOUND_TOPIC_ID= process.env.NEXT_PUBLIC_SECONDAGENT_INBOUND_TOPIC_ID!;
-const FIRSTAGENT_ACCOUNT_ID       = process.env.NEXT_PUBLIC_FIRSTAGENT_ACCOUNT_ID!;
-const HEDERA_NETWORK              = process.env.NEXT_PUBLIC_HEDERA_NETWORK!;
+const SECONDAGENT_ACCOUNT_ID      = process.env.SECONDAGENT_ACCOUNT_ID!;
+const SECONDAGENT_PRIVATE_KEY     = process.env.SECONDAGENT_PRIVATE_KEY!;
+const SECONDAGENT_INBOUND_TOPIC_ID= process.env.SECONDAGENT_INBOUND_TOPIC_ID!;
+const FIRSTAGENT_ACCOUNT_ID       = process.env.FIRSTAGENT_ACCOUNT_ID!;
+const HEDERA_NETWORK              = process.env.HEDERA_NETWORK!;
 
-const CONNECTION_TOPIC_ID         = process.env.NEXT_PUBLIC_CONNECTION_TOPIC_ID ?? '';
+const CONNECTION_TOPIC_ID         = process.env.CONNECTION_TOPIC_ID ?? '0.0.6006045';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BACKEND_URL = process.env.BACKEND_URL!;
 export const api = axios.create({
   baseURL: `${BACKEND_URL}`,
   headers: { 'Content-Type': 'application/json' },
@@ -75,6 +75,7 @@ async function listenAndServe() {
   console.log('[Agent-2] Connected as', client.getOperatorId());
 
   if (CONNECTION_TOPIC_ID.trim() === '0.0.6006045') {
+    console.log('second_id:', SECONDAGENT_ACCOUNT_ID)
     console.log(`[Agent-2] Using preset connection topic ${CONNECTION_TOPIC_ID} – starting listener…`);
     _listenOnSharedTopic(client, CONNECTION_TOPIC_ID.trim()).catch(console.error);
     return; 
@@ -85,7 +86,7 @@ async function listenAndServe() {
   let lastSeenConnReqSeq = 0;
 
   while (true) {
-    console.log('now')
+    console.log('checking request..')
     const { messages } = await client.getMessages(SECONDAGENT_INBOUND_TOPIC_ID);
     const newReqs = messages.filter(
       m => m.op === 'connection_request' && m.sequence_number > lastSeenConnReqSeq
@@ -94,7 +95,7 @@ async function listenAndServe() {
     let newReq;
 
     if (newReqs.length === 0) {
-      console.log('No messages found');
+      console.log('No request found');
     } else {
       newReq = newReqs.reduce((max, msg) =>
         msg.sequence_number > max.sequence_number ? msg : max,
@@ -131,12 +132,11 @@ bClient.setOperator(SECONDAGENT_ACCOUNT_ID, SECONDAGENT_PRIVATE_KEY);
 
 async function _listenOnSharedTopic(client: HCS10Client, topicId: string) {
   while (true) {
-    console.log('running')
+    console.log('Checking messsages...')
     const { messages } = await client.getMessages(topicId);
     let latest;
 
     if (messages.length === 0) {
-      console.log('No messages found');
     } else {
       latest = messages.reduce((max, msg) =>
         msg.sequence_number > max.sequence_number ? msg : max,
@@ -145,23 +145,26 @@ async function _listenOnSharedTopic(client: HCS10Client, topicId: string) {
     }
 
     if (latest) {
-  
-      console.log(`Received at ${latest.timestamp}`);
-      const raw_message = parseStringOrJson(latest.data);
-      let reply;
+      const msgTime  = Number(latest.timestamp);                     
+      const now      = Date.now();   
+      
+      if (now - msgTime <= 10_000) {
+        const raw_message = parseStringOrJson(latest.data);
+        let reply;
 
-      if (typeof raw_message === 'object') {
-        reply = await generateResponse(raw_message.message, raw_message.ig_id, raw_message.sessionId)
-      } else {
-        if (!raw_message.message) {
-            reply = ''
+        if (typeof raw_message === 'object') {
+          reply = await generateResponse(raw_message.message, raw_message.ig_id, raw_message.sessionId)
         } else {
-            reply = await generateResponse(latest.data, '', '')
+          if (!raw_message.message) {
+              reply = ''
+          } else {
+              reply = await generateResponse(latest.data, '', '')
+          }
         }
-      }
-      if (reply !== '') {
-        await client.sendMessage(topicId, reply, latest.m);
-        console.log(`[Agent-2] Replied with: ${reply}`);
+        if (reply !== '') {
+          await client.sendMessage(topicId, reply, latest.m);
+          console.log(`[Agent-2] Replied with: ${reply}`);
+        }
       }
     }
     await _sleep(1000);
