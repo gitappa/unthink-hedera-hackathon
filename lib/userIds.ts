@@ -5,7 +5,9 @@ export const userIds: string[] = [
   'atriumsalonstudio',
   'kushakapila30302',
   'kushakapila80003',
-  'kushakapila_kompj'
+  'kushakapila_kompj',
+  'fashionlior_bgkbq',
+  'fitnessambassadorshq_check_in'
 ];
 
 export function addUserId(id: string) {

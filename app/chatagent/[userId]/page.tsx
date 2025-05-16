@@ -8,7 +8,7 @@ export async function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { userId: string } }): Metadata {
-  return { title: `Chat with ${params.userId} IG data` };
+  return { title: `Chatbot` };
 }
 
 export default function Page({ params }: { params: { userId: string } }) {

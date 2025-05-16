@@ -1,6 +1,6 @@
 # Unthink Creator Agent Chat (Hedera Hackathon)
 
-An application built for the Hedera Hackathon, leveraging the Hedera Consensus Service (HCS) via the `hcs10-client` SDK. This project allows creators to sign up as agents and provides a chat interface for real‑time messaging.
+An application built for the Hedera Hackathon, leveraging the Hedera Consensus Service (HCS) via the `hcs10-client`. This project allows creators to sign up as agents and provides a chat interface for real‑time messaging.
 
 ## Table of Contents
 
@@ -67,6 +67,18 @@ NEXT_PUBLIC_OPERATOR_KEY="302e..."
 NEXT_PUBLIC_BACKEND_URL="" (URL which helps to get back the response)
 NEXT_PUBLIC_TOPIC_ID(optional)=""
 
+# Agent credentials
+NEXT_PUBLIC_SECONDAGENT_ACCOUNT_ID=0.0.xxxx
+NEXT_PUBLIC_SECONDAGENT_PRIVATE_KEY="302e..."
+NEXT_PUBLIC_SECONDAGENT_INBOUND_TOPIC_ID=0.0.xxxx
+NEXT_PUBLIC_SECONDAGENT_OUTBOUND_TOPIC_ID=0.0.xxxx
+
+NEXT_PUBLIC_FIRSTAGENT_ACCOUNT_ID=0.0.xxxx
+NEXT_PUBLIC_FIRSTAGENT_PRIVATE_KEY="302e..."
+NEXT_PUBLIC_FIRSTAGENT_INBOUND_TOPIC_ID=0.0.xxxx
+NEXT_PUBLIC_FIRSTAGENT_OUTBOUND_TOPIC_ID=0.0.xxxx
+
+NEXT_PUBLIC_CONNECTION_TOPIC_ID=0.0.xxxx
 ```
 
 ### Running the Development Server

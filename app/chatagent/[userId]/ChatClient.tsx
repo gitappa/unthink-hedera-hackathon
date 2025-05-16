@@ -18,19 +18,16 @@ import {
   Square,
   CoinsIcon,
 } from 'lucide-react';
-import { streamResponse } from '@/lib/api';
 import ReactMarkdown from 'react-markdown';
 import { cn } from '@/lib/utils';
 
 import {
   Client,
-  TopicMessageSubmitTransaction,
-  Hbar,
   AccountId,
   PrivateKey,
 } from '@hashgraph/sdk';
 
-import { hcsClient } from '@/lib/hcsClient';
+import { agentService } from '../../../lib/clientAgent';
 
 export interface Message {
   type: 'user' | 'assistant';
@@ -127,8 +124,8 @@ const EnhancedMessageItem: React.FC<{ message: Message }> = ({ message }) => {
 
             {!isUser && message.transactionFee && !isLoading && (
               <div className="flex items-center mt-2 text-xs text-gray-500">
-                <CoinsIcon className="w-3 h-3 mr-1 text-yellow-500" />
-                <span>Fee: {message.transactionFee}</span>
+                {/* <CoinsIcon className="w-3 h-3 mr-1 text-yellow-500" />
+                <span>Fee: {message.transactionFee}</span> */}
               </div>
             )}
           </>
@@ -151,6 +148,7 @@ export default function ChatClient({ userId }: { userId: string }) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [sessionId, setSessionId] = useState('');
   const [currentTransactionFee, setCurrentTransactionFee] = useState('');
+  const [topic, setTopic] = useState('');
   const scrollAreaViewportRef = useRef<HTMLDivElement>(null);
 
   const ACCOUNT_ID = process.env.NEXT_PUBLIC_OPERATOR_ID as string;
@@ -164,7 +162,7 @@ export default function ChatClient({ userId }: { userId: string }) {
   const stopStreamingRef = useRef(false);
 
   useEffect(() => {
-    setSessionId('980980');
+    setSessionId(crypto.randomUUID().slice(0, 8));
     setMessages([
       { type: 'assistant', content: "Hello! How can I help you today?", assistantId: '', isLoading: false }
     ]);
@@ -191,20 +189,12 @@ export default function ChatClient({ userId }: { userId: string }) {
     setCurrentTransactionFee('');
 
     try {
-      const response = await streamResponse(query, userId, '', sessionId, history);
-      const assistantMessageText = JSON.parse((response as any).data).toString();
-
-      const TOPIC_ID = process.env.NEXT_PUBLIC_TOPIC_ID as string;
-      const topicId = TOPIC_ID ?? await hcsClient.createTopic('MyMessages', true, true);
-
-      const txResponse = await new TopicMessageSubmitTransaction()
-        .setTopicId(topicId)
-        .setMessage(assistantMessageText)
-        .setMaxTransactionFee(new Hbar(1))
-        .execute(client);
-
-      const txRecord = await txResponse.getRecord(client);
-      const transactionFee = Hbar.fromTinybars(txRecord.transactionFee._valueInTinybar).toString();
+      console.log('latest query', query)
+      const { res, feeSent, feeReceived, topic } = await agentService.sendAndReceive(query, userId, sessionId);
+      setTopic(topic)
+      const assistantMessageText = res as string
+      
+      const transactionFee = feeReceived
       setCurrentTransactionFee(transactionFee);
 
       let i = 0;
@@ -284,10 +274,9 @@ export default function ChatClient({ userId }: { userId: string }) {
 
         <div className="sticky bottom-0 left-0 right-0 border-t bg-white bg-opacity-70 backdrop-blur-md px-6 py-4 z-10">
           <div className="max-w-3xl mx-auto flex items-center">
-            {!isLoading && currentTransactionFee && (
-              <div className="text-xs text-gray-500 flex items-center mr-3 whitespace-nowrap">
-                <CoinsIcon className="w-3 h-3 mr-1 text-yellow-500 flex-shrink-0" />
-                <span>Latest Fee: {currentTransactionFee}</span>
+            {topic !== '' && (
+              <div className="text-xs font-semibold text-gray-500 flex items-center mr-3 whitespace-nowrap">
+                <span>Topic ID: {topic}</span>
               </div>
             )}
             <form onSubmit={handleSubmit} className="flex gap-3 items-center w-full">
