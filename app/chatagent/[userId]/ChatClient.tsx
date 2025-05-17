@@ -19,6 +19,7 @@ import {
   CoinsIcon,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { streamResponse } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
 import {
@@ -188,13 +189,21 @@ export default function ChatClient({ userId }: { userId: string }) {
     setIsStreaming(true);
     setCurrentTransactionFee('');
 
+    const validUserIds = ['fitnessambassadorshq_check_in', 'fitnessambassadorshq'];
+
     try {
-      console.log('latest query', query)
-      const { res, feeSent, feeReceived, topic } = await agentService.sendAndReceive(query, userId, sessionId);
-      setTopic(topic)
-      const assistantMessageText = res as string
+      let assistantMessageText;
+
+      if (validUserIds.includes(userId)) {
+        const response = await streamResponse(query, userId, '', sessionId, history);
+        assistantMessageText = JSON.parse((response as any).data).toString();
+      } else {
+        const { res, topic } = await agentService.sendAndReceive(query, userId, sessionId);
+        setTopic(topic);
+        assistantMessageText = res as string;
+      }
       
-      const transactionFee = feeReceived
+      const transactionFee = ''
       setCurrentTransactionFee(transactionFee);
 
       let i = 0;

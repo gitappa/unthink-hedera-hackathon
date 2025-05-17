@@ -4,6 +4,9 @@ import { FeeConfigBuilder, Logger } from '@hashgraphonline/standards-sdk';
 import { fileURLToPath } from 'url';
 import axios from 'axios';
 
+// import dotenv from 'dotenv';
+// dotenv.config({ path: '.env.local' });
+
 import {
   Client,
 } from "@hashgraph/sdk";
@@ -148,7 +151,7 @@ async function _listenOnSharedTopic(client: HCS10Client, topicId: string) {
       const msgTime  = Number(latest.timestamp);                     
       const now      = Date.now();   
       
-      if (now - msgTime <= 10_000) {
+      if (now - msgTime <= 20_000) {
         const raw_message = parseStringOrJson(latest.data);
         let reply;
 
@@ -162,6 +165,7 @@ async function _listenOnSharedTopic(client: HCS10Client, topicId: string) {
           }
         }
         if (reply !== '') {
+          console.log('asop3', reply) 
           await client.sendMessage(topicId, reply, latest.m);
           console.log(`[Agent-2] Replied with: ${reply}`);
         }
