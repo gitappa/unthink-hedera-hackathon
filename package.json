@@ -11,10 +11,9 @@
     "build:next":             "next build",
     "build:serveragent":      "tsc -p tsconfig.json",
     "build":                  "npm run build:next && npm run build:serveragent",
-
-    "start:next":             "npx serve@latest out -l 3000",
+    "start:next": "next start",
     "start-serveragent":      "node dist/lib/serverAgentListerner.js",
-    "start:prod":             "concurrently \"npm:start:next\" \"npm:start-serveragent\"",
+    "start:prod": "concurrently \"npm run start:next\" \"npm run start-serveragent\"",   
     "start":                  "npm run start:prod",
 
     "lint":                   "next lint"
