@@ -95,7 +95,7 @@ const EnhancedMessageItem: React.FC<{ message: Message }> = ({ message }) => {
         ) : (
           <>
             <ReactMarkdown
-              className="prose prose-sm text-gray-800 break-words max-w-none"
+              className="prose prose-sm text-gray-800 break-words max-w-full"
               components={{
                 a: CustomLink,
                 p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
@@ -195,13 +195,18 @@ export default function ChatClient({ userId }: { userId: string }) {
 
       if (validUserIds.includes(userId)) {
         const response = await streamResponse(query, userId, '', sessionId, history);
-        assistantMessageText = JSON.parse((response as any).data).toString();
+        const parsed = JSON.parse((response as any).data);
+        assistantMessageText = typeof parsed === 'string' ? parsed : parsed.message || String(parsed);
       } else {
         const { res, topic } = await agentService.sendAndReceive(query, userId, sessionId);
         setTopic(topic);
         assistantMessageText = res as string;
       }
-      
+
+      if (assistantMessageText.startsWith('hcs:/')) {
+        assistantMessageText = 'Sorry, I was unable to process your query. Kindly try asking a different question.';
+      }
+
       const transactionFee = ''
       setCurrentTransactionFee(transactionFee);
 
@@ -283,8 +288,8 @@ export default function ChatClient({ userId }: { userId: string }) {
         <div className="sticky bottom-0 left-0 right-0 border-t bg-white bg-opacity-70 backdrop-blur-md px-6 py-4 z-10">
           <div className="max-w-3xl mx-auto flex items-center">
             {topic !== '' && (
-              <div className="text-xs font-semibold text-gray-500 flex items-center mr-3 whitespace-nowrap">
-                <span>Topic ID: {topic}</span>
+              <div className="text-xs text-gray-500 flex items-center mr-3 whitespace-nowrap">
+                <span>ID: {topic}</span>
               </div>
             )}
             <form onSubmit={handleSubmit} className="flex gap-3 items-center w-full">
