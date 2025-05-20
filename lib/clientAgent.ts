@@ -63,9 +63,9 @@ class AgentService {
   public async sendAndReceive(message: string, ig_id: string, sessionId: string): Promise<SendAndReceiveResult> {
 
     let topic;
-    if (CONNECTION_TOPIC_ID.trim() === '0.0.6006045') {
+    if (CONNECTION_TOPIC_ID.trim() === '0.0.6026396') {
       console.log(`[Agent-2] Using preset connection topic ${CONNECTION_TOPIC_ID} – starting listener…`);
-      topic = '0.0.6006045'
+      topic = '0.0.6026396'
     } else {
       if (!this.connectionTopicId) {
         console.log('initialise')
