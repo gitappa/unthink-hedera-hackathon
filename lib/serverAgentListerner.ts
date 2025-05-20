@@ -5,11 +5,8 @@ import { fileURLToPath } from 'url';
 import axios from 'axios';
 
 // import dotenv from 'dotenv';
-// dotenv.config({ path: '.env.local' });
+// dotenv.config();
 
-import {
-  Client,
-} from "@hashgraph/sdk";
 
 const SECONDAGENT_ACCOUNT_ID      = process.env.SECONDAGENT_ACCOUNT_ID!;
 const SECONDAGENT_PRIVATE_KEY     = process.env.SECONDAGENT_PRIVATE_KEY!;
@@ -17,7 +14,7 @@ const SECONDAGENT_INBOUND_TOPIC_ID= process.env.SECONDAGENT_INBOUND_TOPIC_ID!;
 const FIRSTAGENT_ACCOUNT_ID       = process.env.FIRSTAGENT_ACCOUNT_ID!;
 const HEDERA_NETWORK              = process.env.HEDERA_NETWORK!;
 
-const CONNECTION_TOPIC_ID         = process.env.CONNECTION_TOPIC_ID ?? '0.0.6006045';
+const CONNECTION_TOPIC_ID         = process.env.CONNECTION_TOPIC_ID ?? '';
 
 const BACKEND_URL = process.env.BACKEND_URL!;
 export const api = axios.create({
@@ -77,14 +74,16 @@ async function listenAndServe() {
   );
   console.log('[Agent-2] Connected as', client.getOperatorId());
 
-  if (CONNECTION_TOPIC_ID.trim() === '0.0.6006045') {
+  if (CONNECTION_TOPIC_ID.trim() === '0.0.6026396 ') {
     console.log('second_id:', SECONDAGENT_ACCOUNT_ID)
     console.log(`[Agent-2] Using preset connection topic ${CONNECTION_TOPIC_ID} – starting listener…`);
     _listenOnSharedTopic(client, CONNECTION_TOPIC_ID.trim()).catch(console.error);
     return; 
   }
 
-  const feeConfig = new FeeConfigBuilder({network:HEDERA_NETWORK === 'mainnet' ? 'mainnet' : 'testnet', logger: new Logger}).addHbarFee(2, SECONDAGENT_ACCOUNT_ID);
+  const MESSAGE_FEE = 0.5
+
+  const feeConfig = new FeeConfigBuilder({network:HEDERA_NETWORK === 'mainnet' ? 'mainnet' : 'testnet', logger: new Logger}).addHbarFee(MESSAGE_FEE, SECONDAGENT_ACCOUNT_ID);
 
   let lastSeenConnReqSeq = 0;
 
@@ -128,9 +127,6 @@ async function listenAndServe() {
     await _sleep(10000);
   }
 }
-
-const bClient = Client.forTestnet();
-bClient.setOperator(SECONDAGENT_ACCOUNT_ID, SECONDAGENT_PRIVATE_KEY);
 
 
 async function _listenOnSharedTopic(client: HCS10Client, topicId: string) {

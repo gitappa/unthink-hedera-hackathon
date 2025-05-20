@@ -1,6 +1,6 @@
 // lib/clientAgent.ts
 import { HCS10Client } from '@hashgraphonline/standards-agent-kit';
-import { Client, TopicMessageSubmitTransaction } from "@hashgraph/sdk";
+import { Client } from "@hashgraph/sdk";
 
 
 const FIRSTAGENT_ACCOUNT_ID = process.env.NEXT_PUBLIC_FIRSTAGENT_ACCOUNT_ID!;
@@ -12,8 +12,6 @@ const CONNECTION_TOPIC_ID = process.env.NEXT_PUBLIC_CONNECTION_TOPIC_ID ?? '';
 
 export interface SendAndReceiveResult {
   res: string;
-  feeSent: string;   
-  feeReceived: string; 
   topic: string;
 }
 
@@ -32,15 +30,6 @@ class AgentService {
       HEDERA_NETWORK === 'mainnet' ? 'mainnet' : 'testnet',
       { logLevel: 'info' }
     );
-  }
-
-  private async submitWithFee(topic: string, msg: string): Promise<string> {
-    const tx = await new TopicMessageSubmitTransaction()
-      .setTopicId(topic)
-      .setMessage(msg)
-      .execute(bClient);
-    const record = await tx.getRecord(bClient);
-    return record.transactionFee.toString();
   }
 
   private async initConnection() {
@@ -114,23 +103,12 @@ class AgentService {
         let latestData: string;
         latestData = latest.data;
 
-        // const [feeSent, feeReceived] = await Promise.all([
-        //   this.submitWithFee(topic, jsonMessage),
-        //   this.submitWithFee(topic, latestData),
-        // ])
-
-        // dummy fee data
-        const feeSent = '0.0004678'
-        const feeReceived = '0.0003238'
-
         return {
           res:    latestData,
-          feeSent,
-          feeReceived,
           topic,
         };
       }
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 500));
     }
   }
 }

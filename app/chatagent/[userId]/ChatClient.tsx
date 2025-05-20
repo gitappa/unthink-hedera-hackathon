@@ -16,7 +16,6 @@ import {
   User,
   Loader2,
   Square,
-  CoinsIcon,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { streamResponse } from '@/lib/api';

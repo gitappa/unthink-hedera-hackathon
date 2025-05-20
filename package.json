@@ -14,7 +14,7 @@
     "start:next": "next start",
     "start-serveragent":      "node dist/lib/serverAgentListerner.js",
     "start:prod": "concurrently \"npm run start:next\" \"npm run start-serveragent\"",   
-    "start":                  "npm run start:prod",
+    "start": "npm run start:next",
 
     "lint":                   "next lint"
   },
