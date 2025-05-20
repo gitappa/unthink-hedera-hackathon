@@ -191,7 +191,7 @@ export default function ChatClient({ userId }: { userId: string }) {
     const validUserIds = ['fitnessambassadorshq_check_in', 'fitnessambassadorshq'];
 
     try {
-      let assistantMessageText;
+      let assistantMessageText: string;
 
       if (validUserIds.includes(userId)) {
         const response = await streamResponse(query, userId, '', sessionId, history);
