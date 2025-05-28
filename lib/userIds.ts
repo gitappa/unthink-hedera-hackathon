@@ -7,6 +7,7 @@ export const userIds: string[] = [
   'kushakapila80003',
   'kushakapila_kompj',
   'fashionlior_bgkbq',
+  'omgheysam',
   'fitnessambassadorshq_check_in'
 ];
 

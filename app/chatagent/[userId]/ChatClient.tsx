@@ -188,19 +188,19 @@ export default function ChatClient({ userId }: { userId: string }) {
     setIsStreaming(true);
     setCurrentTransactionFee('');
 
-    const validUserIds = ['fitnessambassadorshq_check_in', 'fitnessambassadorshq'];
+    const HCSUserIds = ['averiebishop'];
 
     try {
       let assistantMessageText: string;
 
-      if (validUserIds.includes(userId)) {
-        const response = await streamResponse(query, userId, '', sessionId, history);
-        const parsed = JSON.parse((response as any).data);
-        assistantMessageText = typeof parsed === 'string' ? parsed : parsed.message || String(parsed);
-      } else {
+      if (HCSUserIds.includes(userId)) {
         const { res, topic } = await agentService.sendAndReceive(query, userId, sessionId);
         setTopic(topic);
         assistantMessageText = res as string;
+      } else {
+        const response = await streamResponse(query, userId, '', sessionId, history);
+        const parsed = JSON.parse((response as any).data);
+        assistantMessageText = typeof parsed === 'string' ? parsed : parsed.message || String(parsed)        
       }
 
       if (assistantMessageText.startsWith('hcs:/')) {
