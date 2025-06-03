@@ -9,7 +9,8 @@ export const userIds: string[] = [
   'fashionlior_bgkbq',
   'omgheysam',
   'stats_agent_unthink_ai_event_stats_9287rt',
-  'fitnessambassadorshq_check_in'
+  'fitnessambassadorshq_check_in',
+  'joshemmettufc'
 ];
 
 export function addUserId(id: string) {
