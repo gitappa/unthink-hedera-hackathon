@@ -163,10 +163,13 @@ export default function ChatClient({ userId }: { userId: string }) {
 
   useEffect(() => {
     setSessionId(crypto.randomUUID().slice(0, 8));
+    const initialMessageContent = userId === 'averiebishop'
+      ? "Hello I am Averie's agent and will answer simple questions on her behalf. \nShe has a community of 79.7K followers on instagram! She has worked with brands like sezane and Franco Sarto. She usually posts about #career #dayinthe #life #law #texas"
+      : "Hello! How can I help you today?";
     setMessages([
-      { type: 'assistant', content: "Hello! How can I help you today?", assistantId: '', isLoading: false }
+      { type: 'assistant', content: initialMessageContent, assistantId: '', isLoading: false }
     ]);
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const vp = scrollAreaViewportRef.current;
