@@ -10,7 +10,14 @@ export const userIds: string[] = [
   'omgheysam',
   'stats_agent_unthink_ai_event_stats_9287rt',
   'fitnessambassadorshq_check_in',
-  'joshemmettufc'
+  'joshemmettufc',
+  'johnkoetsier_rycrq',
+  'gerber_media_flfvr',
+  'holly.fishuhh_tyhiq',
+  'therealaanchalarora_tdkzs',
+  'tourifique_rnjaq',
+  'quarters.app_mkffx',
+  'fitqueen.0_azpex'
 ];
 
 export function addUserId(id: string) {
