@@ -45,7 +45,6 @@ const CustomLink = (props: any) => (
     className="text-purple-600 hover:underline inline-flex items-center gap-1 font-medium"
   >
     {props.children}
-    <ExternalLink className="w-3 h-3 inline" />
   </a>
 );
 
@@ -53,7 +52,7 @@ const urlRegex = /(https?:\/\/[^\s]+)/g;
 const convertUrlsToMarkdown = (text: string) =>
   text.replace(urlRegex, (url) => {
     if (text.includes('[') && text.includes(`](${url})`)) return url;
-    return `[${url}](${url})`;
+    return `[link](${url})`;
   });
 
 const LoadingIndicator = () => (
@@ -214,7 +213,7 @@ export default function ChatClient({ userId }: { userId: string }) {
       setCurrentTransactionFee(transactionFee);
 
       let i = 0;
-      const streamInterval = 10;
+      const streamInterval = 2;
       while (i < assistantMessageText.length && !stopStreamingRef.current) {
         const slice = assistantMessageText.slice(0, i + 1);
         setMessages(prev => {

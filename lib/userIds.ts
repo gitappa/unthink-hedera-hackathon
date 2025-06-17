@@ -17,7 +17,9 @@ export const userIds: string[] = [
   'therealaanchalarora_tdkzs',
   'tourifique_rnjaq',
   'quarters.app_mkffx',
-  'fitqueen.0_azpex'
+  'fitqueen.0_azpex',
+  'mightymomjess_libkg',
+  'torontonewmom_dczed',
 ];
 
 export function addUserId(id: string) {
