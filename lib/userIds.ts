@@ -20,6 +20,7 @@ export const userIds: string[] = [
   'fitqueen.0_azpex',
   'mightymomjess_libkg',
   'torontonewmom_dczed',
+  'ishitasalujaimageconsultancy_pieay'
 ];
 
 export function addUserId(id: string) {
