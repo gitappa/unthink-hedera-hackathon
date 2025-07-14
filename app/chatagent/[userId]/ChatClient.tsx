@@ -190,7 +190,7 @@ export default function ChatClient({ userId }: { userId: string }) {
     setIsStreaming(true);
     setCurrentTransactionFee('');
 
-    const HCSUserIds = ['averiebishop'];
+    const HCSUserIds = ['dummy'];
 
     try {
       let assistantMessageText: string;
