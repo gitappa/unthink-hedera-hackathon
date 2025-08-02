@@ -201,8 +201,9 @@ export default function ChatClient({ userId }: { userId: string }) {
         assistantMessageText = res as string;
       } else {
         const response = await streamResponse(query, userId, '', sessionId, history);
-        const parsed = JSON.parse((response as any).data);
-        assistantMessageText = typeof parsed === 'string' ? parsed : parsed.message || String(parsed)        
+        const parsedData = JSON.parse((response as any).data);
+        console.log(parsedData.response);
+        assistantMessageText = parsedData.response       
       }
 
       if (assistantMessageText.startsWith('hcs:/')) {
