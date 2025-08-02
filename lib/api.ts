@@ -27,8 +27,7 @@ export interface Message {
     isLoading?: boolean;
 }
 
-// const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-const BACKEND_URL = "http://34.171.225.43:8084"
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const api = axios.create({
   
@@ -53,7 +52,7 @@ export async function streamResponse(
   sessionId: string,
   messageHistory: Message[] // Add this parameter
 ): Promise<ReadableStream> {
-  const response = await api.post('/chat', {
+  const response = await api.post('/chat_agent/chat', {
     message: text,
     user_id: userId,
     assistant_id: assistantId,

@@ -11,7 +11,7 @@ import { addUserId } from '@/lib/userIds';
 
 // Define the API endpoint
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-const API_ENDPOINT = `${BACKEND_URL}/create_agent`;
+const API_ENDPOINT = `${BACKEND_URL}/chat_agent/create_agent`;
 
 export default function CreateAgentPage() {
     const id = useId(); // Hook for generating unique IDs for form elements
