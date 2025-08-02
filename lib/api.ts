@@ -27,7 +27,8 @@ export interface Message {
     isLoading?: boolean;
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+// const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BACKEND_URL = "http://34.171.225.43:8084"
 
 export const api = axios.create({
   
